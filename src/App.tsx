@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import './App.css';
+import './style/theme.scss';
 import { Footer } from './component/Footer';
 import { YFII_MOON_POOLS_HECO } from './constant/pools';
 import { YFIIPoolCard } from './component/Pool';
 
 function App() {
   const [hideStopped, toggle] = useState(false);
+  const [theme, setTheme] = useState('light');
+
   return (
-    <div className="App">
+    <div className={`App ${theme}`}>
       <header className="App-header">
         <pre>
           {`
-****************** 👨‍🌾 UNOFFICIAL HECO YIELD FARMING CALCULATOR 👨‍🌾 ******************
- Currently list YFII on HECO
+****************** 👨‍🌾 UNOFFICIAL YFII YIELD FARMING CALCULATOR 👨‍🌾 ******************
+ Currently list  HECO
 ************************************************************************************
 `}
         </pre>
