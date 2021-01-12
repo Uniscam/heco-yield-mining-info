@@ -6,7 +6,8 @@ export function BSC() {
         <pre>
        {`============ YFII on BSC ================`}
       </pre>
-      { YFII_MOON_POOLS_BSC.map(pool => <YFIIPoolCard
+        { YFII_MOON_POOLS_BSC.map(pool => <YFIIPoolCard
+          key={pool.name}
           pool={pool}
       ></YFIIPoolCard>)}
         </>

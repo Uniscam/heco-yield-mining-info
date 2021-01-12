@@ -6,7 +6,8 @@ export function Heco() {
         <pre>
        {`============ YFII on Heco ================`}
       </pre>
-      { YFII_MOON_POOLS_HECO.map(pool => <YFIIPoolCard
+        { YFII_MOON_POOLS_HECO.map(pool => <YFIIPoolCard
+          key={pool.name}
           pool={pool}
       ></YFIIPoolCard>)}
         </>
