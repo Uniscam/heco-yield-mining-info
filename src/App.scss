@@ -1,5 +1,23 @@
+html {
+  background: var(--theme-page-background);
+  color: var(--theme-page-text);
+}
+
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   text-align: center;
   background: var(--theme-page-background);
   color: var(--theme-page-text);
+}
+
+// a:visited {
+//   color: var(--theme-page-text);
+// }
+
+a {
+  color: var(--theme-color);
 }

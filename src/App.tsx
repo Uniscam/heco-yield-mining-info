@@ -8,7 +8,11 @@ import { BSC } from "./views/BSC";
 
 function App() {
   const [hideStopped, toggle] = useState(false);
-  const [theme, setTheme] = useState('light');
+  const isOsDarkmode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const [theme, setTheme] = useState(isOsDarkmode ? 'dark' : 'light');
+  const switchTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  }
 
   return (
     <Router>
@@ -18,7 +22,9 @@ function App() {
           {`
 ****************** 👨‍🌾 UNOFFICIAL YFII YIELD FARMING CALCULATOR 👨‍🌾 ******************
 `}
-<Link to="/">Home</Link> <Link to="/heco">Heco</Link> <Link to="/bsc">BSC</Link>
+            <Link to="/">Home</Link> <Link to="/heco">Heco</Link> <Link to="/bsc">BSC</Link>
+            <br></br>
+            <button onClick={() => switchTheme()} >Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode</button>
             {`
 ************************************************************************************`}
         </pre>
