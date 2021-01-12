@@ -2,6 +2,7 @@ import { utils } from "ethers";
 import React from "react";
 import { Pool } from "../constant/pools/yfii-moon";
 import { usePoolApy } from "../hooks/useFarmApy";
+import { ReadonlyExplorerLink } from "../constant";
 
 export const YFIIPoolCard: React.VFC<{ pool: Pool, hideStopped?: boolean }> = ({ pool, hideStopped }) => {
     const { totalStake, apy, rewardRate, stats, isPoolStopped } = usePoolApy(pool, utils.parseUnits("1", 18), utils.parseUnits("1", 18));
@@ -18,17 +19,18 @@ Loading Lunar Model: ${pool.earnContractAddress}...
 `}</pre>
 
     
-    return <pre style={{ textAlign: 'center' }} >{`
-=============================== ${pool.name} ===============================
-Lunar Model       : ${pool.earnContractAddress}
-Current Mission   : ${stats.mission}
+    return  <>
+                <div style={{ textAlign: 'center' }} >
+                    <div>=============================== {pool.name} ===============================</div>
+                    <div>Lunar Model       : <a href={`${ReadonlyExplorerLink[pool.chainId]}${pool.earnContractAddress}`} target="_blank">{pool.earnContractAddress}</a></div>
+                    <div>Current Mission   : <a href={`${ReadonlyExplorerLink[pool.chainId]}${stats.mission}`} target="_blank">{stats.mission}</a></div>
 
-There are total   : ${utils.formatUnits(totalStake, pool.tokenDecimals)} ${pool.name} staked in ${pool.name} vault
+                    <div>There are total   : {utils.formatUnits(totalStake, pool.tokenDecimals)} {pool.name} staked in {pool.name} vault</div>
 
-RewardRate        : ${utils.formatUnits(rewardRate, pool.itokenDecimals)} ${pool.name} / second
-APY               : ${apy}%
-=====================================================================
-`}
-    </pre>
+                    <div>RewardRate        : {utils.formatUnits(rewardRate, pool.itokenDecimals)} {pool.name} / second</div>
+                    <div>APY               : {apy}%</div>
+                    <div>=====================================================================</div>
+                </div>
+            </>
 }
 

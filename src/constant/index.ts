@@ -17,3 +17,10 @@ export const ReadonlyRpcEndpoint: { [chaidId: number]: string } = {
   [ChainId.BSC_TESTNET]: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   [ChainId.BSC_MAINNET]: "https://bsc-dataseed.binance.org",
 };
+
+export const ReadonlyExplorerLink: { [chaidId: number]: string } = {
+  [ChainId.HECO_MAINNET]: "https://scan.hecochain.com/address/",
+  [ChainId.HECO_TESTNET]: "",
+  [ChainId.BSC_MAINNET]: "https://bscscan.com/address/",
+  [ChainId.BSC_TESTNET]: "",
+};
