@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Footer } from './component/Footer';
 import { YFII_MOON_POOLS_HECO } from './constant/pools';
@@ -13,9 +12,7 @@ function App() {
         <pre>
           {`
 ****************** 👨‍🌾 UNOFFICIAL HECO YIELD FARMING CALCULATOR 👨‍🌾 ******************
-*** Disclaimer ***
-
-Please do your own research before investing.
+ Currently list YFII on HECO
 ************************************************************************************
 `}
         </pre>
