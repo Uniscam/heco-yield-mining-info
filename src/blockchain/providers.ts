@@ -1,7 +1,7 @@
 import { ethers, providers } from "ethers";
 import { ChainId, ReadonlyRpcEndpoint } from "../constant";
 
-export const ReadOnlyProvider = {
+export const ReadOnlyProvider: { [key: number]: any } = {
   [ChainId.HECO_MAINNET]: new providers.JsonRpcProvider(
     ReadonlyRpcEndpoint[ChainId.HECO_MAINNET],
     {

@@ -15,8 +15,30 @@
 
 import { ChainId } from "../index";
 
+export type Pool = {
+  chainId: ChainId | number;
+  id: string;
+  name: string;
+  token: string;
+  tokenDescription: string;
+  tokenAddress: string;
+  tokenDecimals: number;
+  itokenDecimals: number;
+  depostLimit: number;
+  depostAlert: string;
+  tokenDescriptionUrl: string;
+  tokenDescriptionUrl2: string;
+  earnedToken: string;
+  claimedTokenAddress: string;
+  earnedTokenAddress: string;
+  earnContractAddress: string;
+  defaultApy: string;
+  pricePerFullShare: number;
+  pastPricePerFullShare: number;
+};
+
 // path price:
-export const pools = [
+export const pools: Pool[] = [
   /*
   {
     chainId: 56,
@@ -175,7 +197,7 @@ export const pools = [
     tokenDecimals: 18,
     itokenDecimals: 18,
     depostLimit: 0,
-    // depostAlert:'Vault-Dialog-Content',
+    depostAlert: "",
     tokenDescriptionUrl: "",
     tokenDescriptionUrl2: "",
     earnedToken: "WHT",

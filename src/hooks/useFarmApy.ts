@@ -1,19 +1,23 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import LunarModule from "../constant/abi/LunarModule.json";
 import { ReadOnlyProvider } from "../blockchain/providers";
-import { utils } from "ethers";
+import { BigNumber, BigNumberish, utils } from "ethers";
 import { ethers } from "ethers";
 import { ChainId } from "../constant";
+import { getBasicsOf } from "../blockchain/LunarModule";
 
 export function usePoolApy(
   poolAddress: string,
-  everyRewardTokenInBNB: string,
-  everyStakingTokenInBNB: string,
-  rewardTokenDecimal: string,
-  stakingTokenDecimal: string
+  everyRewardValue: BigNumber,
+  everyStakingValue: BigNumber,
+  rewardTokenDecimal: number,
+  stakingTokenDecimal: number
 ) {
-  const [rewardRate, updateRewardRate] = useState("0");
-  const [totalStaked, updateTotalStaked] = useState("0");
+  const [rewardRate, updateRewardRate] = useState(BigNumber.from(0));
+  const [totalStaked, updateTotalStaked] = useState(BigNumber.from(0));
+  const [stats, updateStats] = useState({
+    mission: "",
+  });
 
   const contract = useMemo(() => {
     return new ethers.Contract(
@@ -25,13 +29,21 @@ export function usePoolApy(
 
   const update = useCallback(async () => {
     // rewardRate = reward for every second staking
-    const rewardRate = await contract.rewardRate();
-    // totalStaked amounts for this pool
-    const totalStaked = await contract.totalSupply();
+    // const rewardRate = await contract.rewardRate();
+    // // totalStaked amounts for this pool
+    // const totalStaked = await contract.totalSupply();
+    // const currentMission = await contract.mission();
+    const { rewardRate, totalSupply, mission } = await getBasicsOf(
+      ChainId.HECO_MAINNET,
+      poolAddress
+    );
 
     updateRewardRate(rewardRate);
-    updateTotalStaked(totalStaked);
-  }, [contract]);
+    updateTotalStaked(totalSupply);
+    updateStats({
+      mission,
+    });
+  }, [poolAddress]);
 
   // let apyForDisplay = '---.--'
   // if (rewardRate !== '0' || totalStaked !== '0' ) {
@@ -42,18 +54,19 @@ export function usePoolApy(
   //     apyForDisplay = (_apy * 100).toFixed(2)
   // }
 
+  const isPoolStopped = useMemo(() => rewardRate.eq(0), [rewardRate]);
+
   const memoizedApy = useMemo(() => {
-    if (Number(rewardTokenDecimal) === 0 || Number(stakingTokenDecimal) === 0) {
+    if (rewardTokenDecimal === 0 || stakingTokenDecimal === 0) {
       return "---.--";
     }
-    // BNB is 18 long
-    const formattedRewardTokenInBNB = utils.formatUnits(
-      everyRewardTokenInBNB,
-      18
+    const formattedRewardTokenValue = utils.formatUnits(
+      everyRewardValue,
+      rewardTokenDecimal
     );
-    const formattedStakingTokenInBNB = utils.formatUnits(
-      everyStakingTokenInBNB,
-      18
+    const formattedStakingTokenValue = utils.formatUnits(
+      everyStakingValue,
+      stakingTokenDecimal
     );
 
     const formattedRewardRate = utils.formatUnits(
@@ -70,15 +83,15 @@ export function usePoolApy(
       365 *
       24 *
       3600 *
-      Number(formattedRewardTokenInBNB);
+      Number(formattedRewardTokenValue);
     const totalStakedTokenInBNB =
-      Number(formattedtotalStaked) * Number(formattedStakingTokenInBNB);
+      Number(formattedtotalStaked) * Number(formattedStakingTokenValue);
     const apy = yearlyRewardInBNB / totalStakedTokenInBNB;
     const apyForDisplay = (apy * 100).toFixed(2);
     return apy === Number.POSITIVE_INFINITY ? "---.--" : apyForDisplay;
   }, [
-    everyRewardTokenInBNB,
-    everyStakingTokenInBNB,
+    everyRewardValue,
+    everyStakingValue,
     rewardTokenDecimal,
     stakingTokenDecimal,
     rewardRate,
@@ -95,5 +108,7 @@ export function usePoolApy(
     apy: memoizedApy,
     totalStake: totalStaked,
     rewardRate: rewardRate,
+    stats,
+    isPoolStopped,
   };
 }
