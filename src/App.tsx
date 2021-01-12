@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, BrowserRouter as Router, Switch, Route, } from "react-router-dom";
-import './App.css';
+import './App.scss';
 import './style/theme.scss';
 import { Footer } from './component/Footer';
 import { Heco } from "./views/Heco";
