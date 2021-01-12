@@ -1,34 +1,42 @@
 import React, { useState } from 'react';
+import { Link, BrowserRouter as Router, Switch, Route, } from "react-router-dom";
 import './App.css';
 import './style/theme.scss';
 import { Footer } from './component/Footer';
-import { YFII_MOON_POOLS_HECO } from './constant/pools';
-import { YFIIPoolCard } from './component/Pool';
+import { Heco } from "./views/Heco";
+import { BSC } from "./views/BSC";
 
 function App() {
   const [hideStopped, toggle] = useState(false);
   const [theme, setTheme] = useState('light');
 
   return (
+    <Router>
     <div className={`App ${theme}`}>
       <header className="App-header">
         <pre>
           {`
 ****************** 👨‍🌾 UNOFFICIAL YFII YIELD FARMING CALCULATOR 👨‍🌾 ******************
- Currently list  HECO
-************************************************************************************
 `}
+<Link to="/">Home</Link> <Link to="/heco">Heco</Link> <Link to="/bsc">BSC</Link>
+            {`
+************************************************************************************`}
         </pre>
-      </header>
-      <pre>
-       {`============ YFII on Heco ================`}
-      </pre>
-      { YFII_MOON_POOLS_HECO.map(pool => <YFIIPoolCard
-          pool={pool}
-          hideStopped={hideStopped}
-        ></YFIIPoolCard>)}
+        </header>
+        <Switch>
+          <Route path="/heco">
+            <Heco />
+          </Route>
+          <Route path="/bsc">
+            <BSC />
+          </Route>
+          <Route path="/">
+            <p>Choose one of the network</p>
+          </Route>
+        </Switch>
       <Footer />
-    </div>
+      </div>
+      </Router>
   );
 }
 
