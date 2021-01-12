@@ -14,4 +14,6 @@ export enum ChainId {
 export const ReadonlyRpcEndpoint: { [chaidId: number]: string } = {
   [ChainId.HECO_MAINNET]: "https://http-mainnet.hecochain.com",
   [ChainId.HECO_TESTNET]: "https://http-testnet.hecochain.com",
+  [ChainId.BSC_TESTNET]: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+  [ChainId.BSC_MAINNET]: "https://bsc-dataseed.binance.org",
 };

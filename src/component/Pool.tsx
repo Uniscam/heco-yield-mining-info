@@ -4,7 +4,7 @@ import { Pool } from "../constant/pools/yfii-moon";
 import { usePoolApy } from "../hooks/useFarmApy";
 
 export const YFIIPoolCard: React.VFC<{ pool: Pool, hideStopped?: boolean }> = ({ pool, hideStopped }) => {
-    const { totalStake, apy, rewardRate, stats, isPoolStopped } = usePoolApy(pool.earnContractAddress, utils.parseUnits("1", 18), utils.parseUnits("1", 18), pool.tokenDecimals, pool.itokenDecimals);
+    const { totalStake, apy, rewardRate, stats, isPoolStopped } = usePoolApy(pool, utils.parseUnits("1", 18), utils.parseUnits("1", 18));
     // return <>
     //     <p>The APY of {pool.name} is {apy}</p>
     //     <p>Total Staked: {utils.formatUnits(totalStake, 18)}</p>

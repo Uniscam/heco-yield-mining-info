@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import LunarModule from "../constant/abi/LunarModule.json";
 import { ReadOnlyProvider } from "../blockchain/providers";
-import { BigNumber, BigNumberish, utils } from "ethers";
+import { BigNumber, utils } from "ethers";
 import { ethers } from "ethers";
-import { ChainId } from "../constant";
+// import { ChainId } from "../constant";
 import { getBasicsOf } from "../blockchain/LunarModule";
+import { Pool } from "../constant/pools/yfii-moon";
 
 export function usePoolApy(
-  poolAddress: string,
+  pool: Pool,
   everyRewardValue: BigNumber,
-  everyStakingValue: BigNumber,
-  rewardTokenDecimal: number,
-  stakingTokenDecimal: number
+  everyStakingValue: BigNumber
+  // pool.itokenDecimals: number,
+  // pool.tokenDecimals: number
 ) {
   const [rewardRate, updateRewardRate] = useState(BigNumber.from(0));
   const [totalStaked, updateTotalStaked] = useState(BigNumber.from(0));
@@ -21,11 +22,11 @@ export function usePoolApy(
 
   const contract = useMemo(() => {
     return new ethers.Contract(
-      poolAddress,
+      pool.earnContractAddress,
       LunarModule,
-      ReadOnlyProvider[ChainId.HECO_MAINNET]
+      ReadOnlyProvider[pool.chainId]
     );
-  }, [poolAddress]);
+  }, [pool]);
 
   const update = useCallback(async () => {
     // rewardRate = reward for every second staking
@@ -34,8 +35,8 @@ export function usePoolApy(
     // const totalStaked = await contract.totalSupply();
     // const currentMission = await contract.mission();
     const { rewardRate, totalSupply, mission } = await getBasicsOf(
-      ChainId.HECO_MAINNET,
-      poolAddress
+      pool.chainId,
+      pool.earnContractAddress
     );
 
     updateRewardRate(rewardRate);
@@ -43,7 +44,7 @@ export function usePoolApy(
     updateStats({
       mission,
     });
-  }, [poolAddress]);
+  }, [pool.earnContractAddress, pool.chainId]);
 
   // let apyForDisplay = '---.--'
   // if (rewardRate !== '0' || totalStaked !== '0' ) {
@@ -57,25 +58,25 @@ export function usePoolApy(
   const isPoolStopped = useMemo(() => rewardRate.eq(0), [rewardRate]);
 
   const memoizedApy = useMemo(() => {
-    if (rewardTokenDecimal === 0 || stakingTokenDecimal === 0) {
+    if (pool.itokenDecimals === 0 || pool.tokenDecimals === 0) {
       return "---.--";
     }
     const formattedRewardTokenValue = utils.formatUnits(
       everyRewardValue,
-      rewardTokenDecimal
+      pool.itokenDecimals
     );
     const formattedStakingTokenValue = utils.formatUnits(
       everyStakingValue,
-      stakingTokenDecimal
+      pool.tokenDecimals
     );
 
     const formattedRewardRate = utils.formatUnits(
       rewardRate,
-      rewardTokenDecimal
+      pool.itokenDecimals
     );
     const formattedtotalStaked = utils.formatUnits(
       totalStaked,
-      stakingTokenDecimal
+      pool.tokenDecimals
     );
     // 365天，24小时，每个小时3600秒
     const yearlyRewardInBNB =
@@ -92,8 +93,8 @@ export function usePoolApy(
   }, [
     everyRewardValue,
     everyStakingValue,
-    rewardTokenDecimal,
-    stakingTokenDecimal,
+    pool.itokenDecimals,
+    pool.tokenDecimals,
     rewardRate,
     totalStaked,
   ]);

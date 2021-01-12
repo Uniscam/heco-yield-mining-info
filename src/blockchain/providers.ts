@@ -1,4 +1,4 @@
-import { ethers, providers } from "ethers";
+import { providers } from "ethers";
 import { ChainId, ReadonlyRpcEndpoint } from "../constant";
 
 export const ReadOnlyProvider: { [key: number]: any } = {
@@ -14,6 +14,20 @@ export const ReadOnlyProvider: { [key: number]: any } = {
     {
       chainId: ChainId.HECO_TESTNET,
       name: "Heco Testnet",
+    }
+  ),
+  [ChainId.BSC_MAINNET]: new providers.JsonRpcProvider(
+    ReadonlyRpcEndpoint[ChainId.BSC_MAINNET],
+    {
+      chainId: ChainId.BSC_MAINNET,
+      name: "BSC Mainnet",
+    }
+  ),
+  [ChainId.BSC_TESTNET]: new providers.JsonRpcProvider(
+    ReadonlyRpcEndpoint[ChainId.BSC_TESTNET],
+    {
+      chainId: ChainId.BSC_TESTNET,
+      name: "BSC Testnet",
     }
   ),
 };
