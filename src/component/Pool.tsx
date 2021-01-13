@@ -22,8 +22,8 @@ Loading Lunar Model: ${pool.earnContractAddress}...
     return  <>
                 <div style={{ textAlign: 'center' }} >
                     <div>=============================== {pool.name} ===============================</div>
-                    <div>Lunar Model       : <a href={`${ReadonlyExplorerLink[pool.chainId]}${pool.earnContractAddress}`} target="_blank">{pool.earnContractAddress}</a></div>
-                    <div>Current Mission   : <a href={`${ReadonlyExplorerLink[pool.chainId]}${stats.mission}`} target="_blank">{stats.mission}</a></div>
+                    <div>Lunar Model       : <a href={`${ReadonlyExplorerLink[pool.chainId]}${pool.earnContractAddress}`} target="_blank" rel="noreferrer">{pool.earnContractAddress}</a></div>
+                    <div>Current Mission   : <a href={`${ReadonlyExplorerLink[pool.chainId]}${stats.mission}`} target="_blank" rel="noreferrer">{stats.mission}</a></div>
 
                     <div>There are total   : {utils.formatUnits(totalStake, pool.tokenDecimals)} {pool.name} staked in {pool.name} vault</div>
 

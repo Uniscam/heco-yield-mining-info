@@ -1,7 +1,7 @@
 import { ChainId } from "../constant";
 import { ReadOnlyProvider } from "./providers";
 import Multicall from "../constant/abi/Multicall.json";
-import { BigNumber, Contract, ethers } from "ethers";
+import { BigNumber, Contract } from "ethers";
 
 export const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
   [ChainId.MAINNET]: "0xeefBa1e63905eF1D7ACbA5a8513c70307C1cE441",

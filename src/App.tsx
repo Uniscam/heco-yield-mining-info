@@ -7,7 +7,6 @@ import { Heco } from "./views/Heco";
 import { BSC } from "./views/BSC";
 
 function App() {
-  const [hideStopped, toggle] = useState(false);
   const isOsDarkmode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   const [theme, setTheme] = useState(isOsDarkmode ? 'dark' : 'light');
   const switchTheme = () => {
