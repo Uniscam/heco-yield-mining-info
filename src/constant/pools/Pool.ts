@@ -1,0 +1,21 @@
+export type Pool = {
+    chainId: number;
+    id: string;
+    name: string;
+    token: string;
+    tokenDescription: string;
+    tokenAddress: string;
+    tokenDecimals: number;
+    itokenDecimals: number;
+    depostLimit: number;
+    depostAlert: string;
+    tokenDescriptionUrl: string;
+    tokenDescriptionUrl2: string;
+    earnedToken: string;
+    claimedTokenAddress: string;
+    earnedTokenAddress: string;
+    earnContractAddress: string;
+    defaultApy: string;
+    pricePerFullShare: number;
+    pastPricePerFullShare: number;
+};

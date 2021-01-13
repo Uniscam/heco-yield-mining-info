@@ -5,7 +5,7 @@ import { BigNumber, utils } from "ethers";
 import { ethers } from "ethers";
 // import { ChainId } from "../constant";
 import { getBasicsOf } from "../blockchain/LunarModule";
-import { Pool } from "../constant/pools/yfii-moon";
+import type { Pool } from "../constant/pools/Pool";
 
 export function usePoolApy(
   pool: Pool,

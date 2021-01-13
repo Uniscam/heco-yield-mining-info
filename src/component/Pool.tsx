@@ -1,6 +1,6 @@
 import { utils } from "ethers";
 import React from "react";
-import { Pool } from "../constant/pools/yfii-moon";
+import type { Pool } from "../constant/pools/Pool";
 import { usePoolApy } from "../hooks/useFarmApy";
 import { ReadonlyExplorerLink } from "../constant";
 
@@ -18,7 +18,7 @@ Loading Lunar Model: ${pool.earnContractAddress}...
 =====================================================================
 `}</pre>
 
-    
+
     return  <>
                 <div style={{ textAlign: 'center' }} >
                     <div>=============================== {pool.name} ===============================</div>

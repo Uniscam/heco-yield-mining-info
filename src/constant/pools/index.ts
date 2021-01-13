@@ -1,5 +1,4 @@
-export {
-  pools as YFII_MOON_POOLS,
-  hecoPools as YFII_MOON_POOLS_HECO,
-  bscPools as YFII_MOON_POOLS_BSC,
-} from "./yfii-moon";
+import { pools } from "./yfii-moon";
+
+export const YFII_MOON_POOLS_BSC = pools.filter(pool => pool.chainId === 56);
+export const YFII_MOON_POOLS_HECO = pools.filter(pool => pool.chainId === 128);

@@ -11,8 +11,11 @@
 // earnedTokenAddress: '奖励代币ERC20地址',
 // earnContractAddress: '池子合约地址',
 // price ： 挖的代币的价格！
+
+import type { Pool } from "./Pool";
+
 // path price:
-export const pools = [
+export const pools: Array<Pool> = [
   /*
   {
     chainId: 56,
@@ -154,7 +157,7 @@ export const pools = [
     tokenDescriptionUrl: '',
     tokenDescriptionUrl2: '',
     earnedToken: 'WHT',
-    claimedTokenAddress: '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f',    
+    claimedTokenAddress: '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f',
     earnedTokenAddress: '0x59dfe9c9b67ccf62b4d42c7a884c1ccb20adffaa',
     earnContractAddress: '0x59dfe9c9b67ccf62b4d42c7a884c1ccb20adffaa',
     defaultApy: "39.54",
@@ -171,11 +174,11 @@ export const pools = [
     tokenDecimals: 18,
     itokenDecimals: 18,
     depostLimit:0,
-    // depostAlert:'Vault-Dialog-Content',
+    depostAlert:'',
     tokenDescriptionUrl: '',
     tokenDescriptionUrl2: '',
     earnedToken: 'WHT',
-    claimedTokenAddress: '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f',    
+    claimedTokenAddress: '0x5545153ccfca01fbd7dd11c0b23ba694d9509a6f',
     earnedTokenAddress: '0x59dfe9c9b67ccf62b4d42c7a884c1ccb20adffaa',
     earnContractAddress: '0x59dfe9c9b67ccf62b4d42c7a884c1ccb20adffaa',
     defaultApy: "39.54",
@@ -223,7 +226,7 @@ export const pools = [
     defaultApy: "39.54",
     pricePerFullShare: 1,
     pastPricePerFullShare: 1,
-  },  
+  },
   {
     chainId: 128,
     id: 'eth',
