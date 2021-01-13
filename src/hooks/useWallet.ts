@@ -1,5 +1,5 @@
-import { ethers, Wallet } from "ethers";
-import { useCallback, useEffect, useState } from "react";
+import { ethers } from "ethers";
+import { useEffect, useState } from "react";
 import { Ethereum } from "./global";
 
 function isEthereum(e?: Ethereum): e is Ethereum {
