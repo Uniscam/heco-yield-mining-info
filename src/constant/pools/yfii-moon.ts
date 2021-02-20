@@ -366,7 +366,7 @@ export const pools: Array<Pool> = [
     depostAlert:'',
     tokenDescriptionUrl: '',
     tokenDescriptionUrl2: '',
-    earnedToken: 'USDT',
+    earnedToken: 'LTC',
     claimedTokenAddress: '0xecb56cf772b5c9a6907fb7d32387da2fcbfb63b4',
     earnedTokenAddress: '0xecb56cf772b5c9a6907fb7d32387da2fcbfb63b4',
     earnContractAddress: '0xb85f4eefeaf251f89bd18d3fd02fc555a7ac2dc8',
