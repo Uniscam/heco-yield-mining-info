@@ -19,7 +19,7 @@ export const ReadonlyRpcEndpoint: { [chaidId: number]: string } = {
 };
 
 export const ReadonlyExplorerLink: { [chaidId: number]: string } = {
-  [ChainId.HECO_MAINNET]: "https://scan.hecochain.com/address/",
+  [ChainId.HECO_MAINNET]: "https://hecoinfo.com/address/",
   [ChainId.HECO_TESTNET]: "",
   [ChainId.BSC_MAINNET]: "https://bscscan.com/address/",
   [ChainId.BSC_TESTNET]: "",
